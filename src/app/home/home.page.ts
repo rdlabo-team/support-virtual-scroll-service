@@ -22,7 +22,7 @@ export class HomePage {
     const newItem = (position === 'top') ?
       [{ id: this.itemId, name: `TopItem-${this.itemId}` }].concat(this.items)
       : this.items.concat([{ id: this.itemId, name: `BottomItem-${this.itemId}` }]);
-    this.changeVirtualScroll(this.items, newItem);
+    this.changeVirtualScroll(newItem);
   }
 
   public changeItems(itemId: number) {
@@ -32,24 +32,24 @@ export class HomePage {
       }
       return d;
     });
-    this.changeVirtualScroll(this.items, newItem);
+    this.changeVirtualScroll(newItem);
   }
 
   public deleteItems(itemId: number) {
     const newItem = this.items.filter(d => {
       return d.id !== itemId;
     });
-    this.changeVirtualScroll(this.items, newItem);
+    this.changeVirtualScroll(newItem);
   }
 
   public resetItem() {
     const newItem = Array.from({length: 10}, (_, i) => ({ id: i, name: `${i}`}));
-    this.changeVirtualScroll(this.items, newItem);
+    this.changeVirtualScroll(newItem);
   }
 
-  private changeVirtualScroll(bindingItem, incomingItem) {
+  private changeVirtualScroll(incomingItem): void {
     const { trackByArray, dirtyCheckPosition, changeRangePositions } =
-      this.supportVirtualScroll.diff(bindingItem, incomingItem, this.trackByFn);
+      this.supportVirtualScroll.diff(this.items, incomingItem, this.trackByFn);
     this.items = trackByArray as any;
     if (dirtyCheckPosition !== null) {
       this.virtualScroll.checkRange(dirtyCheckPosition);
