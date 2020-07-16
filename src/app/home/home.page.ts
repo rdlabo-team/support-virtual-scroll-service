@@ -13,70 +13,51 @@ export class HomePage {
   ) {}
 
   @ViewChild(IonVirtualScroll, { static: true }) virtualScroll: IonVirtualScroll;
-  items = Array.from({length: 10}, (_, i) => ({ id: i, name: `${i}`}));
-  itemId = 10;
-  itemHeight = () => 44;
+  public items = Array.from({length: 10}, (_, i) => ({ id: i, name: `${i}`}));
+  private itemId = 10;
+  public itemHeight = () => 44;
 
-  addItems(position: 'top' | 'last') {
+  public addItems(position: 'top' | 'last') {
     this.itemId ++;
     const newItem = (position === 'top') ?
       [{ id: this.itemId, name: `TopItem-${this.itemId}` }].concat(this.items)
       : this.items.concat([{ id: this.itemId, name: `BottomItem-${this.itemId}` }]);
-
-    /**
-     * USE API
-     */
-    const { trackByArray, dirtyCheckPosition } = this.supportVirtualScroll.diff(this.items, newItem, this.trackByFn);
-    this.items = trackByArray as any;
-    if (dirtyCheckPosition !== null) {
-      this.virtualScroll.checkRange(dirtyCheckPosition);
-    }
+    this.changeVirtualScroll(this.items, newItem);
   }
 
-  changeItems(itemId: number) {
+  public changeItems(itemId: number) {
     const newItem = this.items.map(d => {
       if (d.id === itemId) {
         d.name = 'ChangeItem-' + d.id;
       }
       return d;
     });
-
-    /**
-     * USE API
-     */
-    const { trackByArray } = this.supportVirtualScroll.diff(this.items, newItem, this.trackByFn);
-    this.items = trackByArray as any;
+    this.changeVirtualScroll(this.items, newItem);
   }
 
-  deleteItems(itemId: number) {
+  public deleteItems(itemId: number) {
     const newItem = this.items.filter(d => {
       return d.id !== itemId;
     });
-
-    /**
-     * USE API
-     */
-    const { trackByArray, dirtyCheckPosition } = this.supportVirtualScroll.diff(this.items, newItem, this.trackByFn);
-    this.items = trackByArray as any;
-    if (dirtyCheckPosition !== null) {
-      this.virtualScroll.checkRange(dirtyCheckPosition, this.items.length);
-    }
+    this.changeVirtualScroll(this.items, newItem);
   }
 
-  resetItem() {
+  public resetItem() {
     const newItem = Array.from({length: 10}, (_, i) => ({ id: i, name: `${i}`}));
+    this.changeVirtualScroll(this.items, newItem);
+  }
 
-    /**
-     * USE API
-     */
-    const { trackByArray, dirtyCheckPosition } = this.supportVirtualScroll.diff(this.items, newItem, this.trackByFn);
+  private changeVirtualScroll(bindingItem, incomingItem) {
+    const { trackByArray, dirtyCheckPosition, changeRangePositions } =
+      this.supportVirtualScroll.diff(bindingItem, incomingItem, this.trackByFn);
     this.items = trackByArray as any;
-    console.log([trackByArray.length, dirtyCheckPosition]);
     if (dirtyCheckPosition !== null) {
       this.virtualScroll.checkRange(dirtyCheckPosition);
     }
+    changeRangePositions.forEach(range => {
+      this.virtualScroll.checkRange(range.offset, range.range);
+    });
   }
 
-  trackByFn = (index, item) => item.id;
-
+  private trackByFn = (index, item) => item.id;
 }
