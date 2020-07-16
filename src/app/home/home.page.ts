@@ -8,14 +8,14 @@ import { SupportVirtualScrollService } from '../services/support-virtual-scroll.
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  @ViewChild(IonVirtualScroll, { static: true }) virtualScroll: IonVirtualScroll;
-  items = Array.from({length: 10}, (_, i) => ({ id: i, name: `${i}`}));
-  itemHeight = () => 44;
-  itemId = 10;
-
   constructor(
     private supportVirtualScroll: SupportVirtualScrollService,
   ) {}
+
+  @ViewChild(IonVirtualScroll, { static: true }) virtualScroll: IonVirtualScroll;
+  items = Array.from({length: 10}, (_, i) => ({ id: i, name: `${i}`}));
+  itemId = 10;
+  itemHeight = () => 44;
 
   addItems(position: 'top' | 'last') {
     this.itemId ++;
@@ -50,7 +50,7 @@ export class HomePage {
 
   deleteItems(itemId: number) {
     const newItem = this.items.filter(d => {
-      return d.id !== itemId
+      return d.id !== itemId;
     });
 
     /**
