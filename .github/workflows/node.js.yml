@@ -1,0 +1,47 @@
+name: CI
+on:
+  push:
+    branches: [ master ]
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      # 環境構築
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # パッケージのキャッシュ
+      - name: Use cached node_modules
+        uses: actions/cache@v2
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-v3-dependencies-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-v3-dependencies-
+
+      # パッケージインストール
+      - run: |
+          npm ci
+
+      # アプリとAPIのビルド
+      - run: npm run lint
+      - run: npm run test
+      - run: npm run build -- --prod && echo '/* /index.html 200' >> www/_redirects
+
+      - name: deploy
+        run: |
+          npx netlify-cli deploy \
+            --site ${{ secrets.NETLIFY_SITE_ID }} \
+            --dir www/ \
+            --auth ${{ secrets.NETLIFY_TOKEN }} \
+            --prod
