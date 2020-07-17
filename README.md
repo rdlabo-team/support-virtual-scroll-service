@@ -1,7 +1,9 @@
 ![CI](https://github.com/rdlabo-team/support-virtual-scroll-service/workflows/CI/badge.svg)
-![DEMO](https://img.shields.io/badge/DEMO-Netlify-blue)
+[![DEMO](https://img.shields.io/badge/DEMO-Netlify-blue)](https://support-virtual-scroll-service.netlify.app)
 
 # SupportVirtualScrollService
+
+Demo is [here](https://support-virtual-scroll-service.netlify.app/).
 
 ## Description
 
@@ -12,8 +14,8 @@ https://github.com/ionic-team/ionic-framework/pull/21762
 But if you use this service instead of `trackBy`, re-rendering is improved bit.
 
 ## How to use
-1. Copy [support-virtual-scroll.service.ts](https://github.com/rdlabo-team/angular-ion-virtual-scroll-example/blob/master/src/app/services/support-virtual-scroll.service.ts) to in project
-2. Check [example](https://github.com/rdlabo-team/support-virtual-scroll-service/blob/master/src/app/home/home.page.ts#L62-L72) for getting how to use
+1. Copy [support-virtual-scroll.service.ts](https://github.com/rdlabo-team/angular-ion-virtual-scroll-example/blob/master/src/app/services/support-virtual-scroll.service.ts) to in project.
+2. Check [example](https://github.com/rdlabo-team/support-virtual-scroll-service/blob/master/src/app/home/home.page.ts#L62-L72) for getting how to use.
 
 ## Method
 ### diff(bindingItem: any[], incomingItem: any[], trackByFn:TrackByFunction<any>)
