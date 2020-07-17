@@ -1,3 +1,6 @@
+![CI](https://github.com/rdlabo-team/support-virtual-scroll-service/workflows/CI/badge.svg)
+![DEMO](https://img.shields.io/badge/DEMO-Netlify-blue)
+
 # SupportVirtualScrollService
 
 ## Description
