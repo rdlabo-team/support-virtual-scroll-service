@@ -35,7 +35,7 @@ jobs:
 
       # アプリとAPIのビルド
       - run: npm run lint
-      - run: npm run test
+      - run: npm run test -- --watch=false --browsers=ChromeHeadless
       - run: npm run build -- --prod && echo '/* /index.html 200' >> www/_redirects
 
       - name: deploy
