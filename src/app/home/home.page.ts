@@ -62,7 +62,7 @@ export class HomePage {
   private changeVirtualScroll(incomingItem): void {
     const { trackByArray, dirtyCheckPosition, changeRangePositions } =
       this.supportVirtualScroll.diff(this.items, incomingItem, this.trackByFn);
-    this.items = trackByArray as any;
+    this.items = trackByArray;
     if (dirtyCheckPosition !== null) {
       this.virtualScroll.checkRange(dirtyCheckPosition);
     }

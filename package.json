@@ -1,8 +1,9 @@
 {
-  "name": "angular-ion-virtual-scroll-example",
+  "name": "support-virtual-scroll-service",
+  "description": "This is support ion-virtual-scroll service sample in angular instead of trackBy.",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "author": "Masahiko Sakakibara<sakakibara@rdlabo.jp>",
+  "homepage": "https://www.rdlabo.jp/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -11,7 +12,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/common": "~9.1.6",
     "@angular/core": "~9.1.6",
@@ -49,6 +50,5 @@
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~3.8.3"
-  },
-  "description": "An Ionic project"
+  }
 }

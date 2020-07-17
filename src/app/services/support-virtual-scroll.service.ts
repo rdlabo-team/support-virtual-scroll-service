@@ -117,5 +117,5 @@ export interface VirtualScrollDiff {
     range: number;
   }[];
   dirtyCheckPosition: number | null;
-  trackByArray: object[];
+  trackByArray: any[];
 }

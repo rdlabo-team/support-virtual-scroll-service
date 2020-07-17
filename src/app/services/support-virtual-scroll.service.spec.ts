@@ -43,8 +43,7 @@ describe('SupportVirtualScrollService', () => {
     });
 
     const { trackByArray }  = service.diff(items, newItem, trackByFn);
-    const trackBy = trackByArray as any;
-    expect(trackBy[5].name).toEqual('changeItem');
+    expect(trackByArray[5].name).toEqual('changeItem');
   });
 
   it('delete item', () => {
@@ -67,9 +66,8 @@ describe('SupportVirtualScrollService', () => {
     });
 
     const { trackByArray, dirtyCheckPosition }  = service.diff(items, newItem, trackByFn);
-    const array = trackByArray as any;
     expect(dirtyCheckPosition).toEqual(10);
-    expect(array.length).toEqual(11);
-    expect(array[5].name).toEqual('ChangeItem-5');
+    expect(trackByArray.length).toEqual(11);
+    expect(trackByArray[5].name).toEqual('ChangeItem-5');
   });
 });
