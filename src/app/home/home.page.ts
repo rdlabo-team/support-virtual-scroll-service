@@ -47,6 +47,18 @@ export class HomePage {
     this.changeVirtualScroll(newItem);
   }
 
+  public mix() {
+    this.itemId ++;
+    let newItem = this.items.concat([{ id: this.itemId, name: `BottomItem-${this.itemId}` }]);
+    newItem = newItem.map((d, i) => {
+      if (i === 5) {
+        d.name = 'ChangeItem-' + d.id;
+      }
+      return d;
+    });
+    this.changeVirtualScroll(newItem);
+  }
+
   private changeVirtualScroll(incomingItem): void {
     const { trackByArray, dirtyCheckPosition, changeRangePositions } =
       this.supportVirtualScroll.diff(this.items, incomingItem, this.trackByFn);

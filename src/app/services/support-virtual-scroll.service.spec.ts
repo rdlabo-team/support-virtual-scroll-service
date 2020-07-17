@@ -55,4 +55,21 @@ describe('SupportVirtualScrollService', () => {
     expect(dirtyCheckPosition).toEqual(5);
     expect(trackByArray.length).toEqual(9);
   });
+
+  it('add and change item', () => {
+    const items = Array.from({length: 10}, (_, i) => ({ id: i, name: `${i}`}));
+    let newItem = items.concat([{ id: 11, name: `BottomItem-11` }]);
+    newItem = newItem.map((d, i) => {
+      if (i === 5) {
+        d.name = 'ChangeItem-' + d.id;
+      }
+      return d;
+    });
+
+    const { trackByArray, dirtyCheckPosition }  = service.diff(items, newItem, trackByFn);
+    const array = trackByArray as any;
+    expect(dirtyCheckPosition).toEqual(10);
+    expect(array.length).toEqual(11);
+    expect(array[5].name).toEqual('ChangeItem-5');
+  });
 });
