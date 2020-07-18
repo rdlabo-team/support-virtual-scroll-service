@@ -9,7 +9,7 @@ Demo is [here](https://support-virtual-scroll-service.netlify.app/).
 
 This is support `ion-virtual-scroll` service sample in angular instead of `trackBy`. `trackBy` in `ion-virtual-scroll` don't work.(2020-07-17 now):
 
-https://github.com/ionic-team/ionic-framework/pull/21762
+https://github.com/ionic-team/ionic-framework/issues/17540
 
 But if you use this service instead of `trackBy`, re-rendering is improved bit.
 
